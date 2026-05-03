@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tabanca Menarca - Educação sobre saúde menstrual para jovens da Guiné-Bissau">
+    <meta name="theme-color" content="#0a7ea4">
+    <title>Tabanca Menarca - Saúde Menstrual</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>Tabanca Menarca</h1>
+            </div>
+            <nav class="nav-desktop">
+                <a href="#" data-page="home" class="nav-link active">Início</a>
+                <a href="#" data-page="learn" class="nav-link">Aprenda</a>
+                <a href="#" data-page="tracker" class="nav-link">Rastreador</a>
+                <a href="#" data-page="community" class="nav-link">Comunidade</a>
+                <a href="#" data-page="profile" class="nav-link">Perfil</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" title="Alternar tema">🌙</button>
+                <button class="btn-icon mobile-menu-toggle" title="Menu">☰</button>
+            </div>
+        </div>
+        <nav class="nav-mobile">
+            <a href="#" data-page="home" class="nav-link active">Início</a>
+            <a href="#" data-page="learn" class="nav-link">Aprenda</a>
+            <a href="#" data-page="tracker" class="nav-link">Rastreador</a>
+            <a href="#" data-page="community" class="nav-link">Comunidade</a>
+            <a href="#" data-page="profile" class="nav-link">Perfil</a>
+        </nav>
+    </header>
+
+    <!-- SOS Button (Always Visible) -->
+    <button class="sos-button" id="sos-button" title="Emergência">🆘 SOS</button>
+
+    <!-- Alert Container -->
+    <div id="alert-container" class="alert-container"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Page -->
+        <div id="page-home" class="page active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Bem-vinda ao Tabanca Menarca</h1>
+                    <p>Seu espaço seguro para aprender sobre saúde menstrual</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- Authentication Section -->
+                <section id="auth-section" class="section mb-lg">
+                    <div class="grid grid-2">
+                        <button class="card card-interactive" onclick="showPage('register')">
+                            <div class="card-icon">📝</div>
+                            <h3>Criar Conta</h3>
+                            <p>Registre-se para acessar todos os recursos</p>
+                        </button>
+                        <button class="card card-interactive" onclick="showPage('login')">
+                            <div class="card-icon">🔓</div>
+                            <h3>Entrar</h3>
+                            <p>Faça login com sua conta existente</p>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Features Preview -->
+                <section class="section mb-lg">
+                    <h2>Recursos Principais</h2>
+                    <div class="grid grid-3">
+                        <div class="card">
+                            <div class="card-icon">📚</div>
+                            <h3>Educação</h3>
+                            <p>Aprenda sobre menstruação, ovulação e saúde reprodutiva</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📅</div>
+                            <h3>Rastreador</h3>
+                            <p>Acompanhe seu ciclo menstrual e receba lembretes</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">👥</div>
+                            <h3>Comunidade</h3>
+                            <p>Conecte-se com outras jovens e compartilhe experiências</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Registration Page -->
+        <div id="page-register" class="page">
+            <div class="container container-sm">
+                <button class="btn-back" onclick="showPage('home')">← Voltar</button>
+                <h1>Criar Conta</h1>
+                <p class="text-muted mb-lg">Preencha os dados abaixo para criar sua conta</p>
+
+                <form id="register-form" class="form">
+                    <div class="form-group">
+                        <label for="reg-email">Email *</label>
+                        <input type="email" id="reg-email" name="email" required placeholder="seu@email.com">
+                        <small class="text-muted">Usaremos este email para verificação</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-nickname">Nome de Usuário *</label>
+                        <input type="text" id="reg-nickname" name="nickname" required placeholder="Seu apelido">
+                        <small class="text-muted">Como você quer ser chamada na comunidade</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-password">Senha *</label>
+                        <input type="password" id="reg-password" name="password" required placeholder="Mínimo 8 caracteres">
+                        <small class="text-muted">Use uma senha forte</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-password-confirm">Confirmar Senha *</label>
+                        <input type="password" id="reg-password-confirm" name="password_confirm" required placeholder="Repita sua senha">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-age-group">Sua Faixa Etária *</label>
+                        <select id="reg-age-group" name="age_group" required onchange="handleAgeGroupChange(this.value)">
+                            <option value="">Selecione sua faixa etária</option>
+                            <option value="1">8-12 anos</option>
+                            <option value="2">13-15 anos</option>
+                            <option value="3">18+ anos</option>
+                        </select>
+                    </div>
+
+                    <!-- Parental Consent for 13-15 -->
+                    <div id="parental-consent-section" class="form-group" style="display: none;">
+                        <div class="alert alert-info">
+                            <span>ℹ️</span>
+                            <div>
+                                <strong>Consentimento dos Pais</strong>
+                                <p>Como você tem entre 13-15 anos, precisamos do consentimento de um responsável. Enviaremos um email para verificação.</p>
+                            </div>
+                        </div>
+
+                        <label for="reg-parent-email">Email do Responsável *</label>
+                        <input type="email" id="reg-parent-email" name="parent_email" placeholder="email@responsavel.com">
+                        <small class="text-muted">Enviaremos um link de verificação para este email</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox">
+                            <input type="checkbox" id="reg-terms" name="terms" required>
+                            <span>Concordo com os <a href="#" onclick="showTerms()">Termos de Serviço</a> e <a href="#" onclick="showPrivacy()">Política de Privacidade</a> *</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-block">Criar Conta</button>
+                    <p class="text-center text-muted mt-md">
+                        Já tem conta? <a href="#" onclick="showPage('login')" class="link">Faça login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="page-login" class="page">
+            <div class="container container-sm">
+                <button class="btn-back" onclick="showPage('home')">← Voltar</button>
+                <h1>Entrar</h1>
+                <p class="text-muted mb-lg">Faça login com sua conta</p>
+
+                <form id="login-form" class="form">
+                    <div class="form-group">
+                        <label for="login-email">Email *</label>
+                        <input type="email" id="login-email" name="email" required placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Senha *</label>
+                        <input type="password" id="login-password" name="password" required placeholder="Sua senha">
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-block">Entrar</button>
+
+                    <p class="text-center text-muted mt-md">
+                        <a href="#" onclick="showPage('forgot-password')" class="link">Esqueceu a senha?</a>
+                    </p>
+
+                    <p class="text-center text-muted">
+                        Não tem conta? <a href="#" onclick="showPage('register')" class="link">Crie uma agora</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Learn Page -->
+        <div id="page-learn" class="page">
+            <div class="container">
+                <h1>Aprenda sobre Saúde Menstrual</h1>
+                <p class="text-muted mb-lg">Escolha um tópico para começar</p>
+                <div id="content-modules" class="grid grid-3"></div>
+            </div>
+        </div>
+
+        <!-- Tracker Page -->
+        <div id="page-tracker" class="page">
+            <div class="container">
+                <h1>Rastreador de Ciclo</h1>
+                <p class="text-muted mb-lg">Acompanhe seu ciclo menstrual</p>
+                <div id="tracker-content"></div>
+            </div>
+        </div>
+
+        <!-- Community Page -->
+        <div id="page-community" class="page">
+            <div class="container">
+                <h1>Comunidade</h1>
+                <p class="text-muted mb-lg">Conecte-se com outras jovens</p>
+                <div id="community-content"></div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="page-profile" class="page">
+            <div class="container container-sm">
+                <h1>Meu Perfil</h1>
+                <div id="profile-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SOS Modal -->
+    <div id="sos-modal" class="modal">
+        <div class="modal-content modal-lg">
+            <button class="modal-close">✕</button>
+            <h2>🆘 Recursos de Emergência</h2>
+            <div id="sos-content"></div>
+        </div>
+    </div>
+
+    <!-- Leonor AI Modal -->
+    <div id="leonor-modal" class="modal">
+        <div class="modal-content modal-md">
+            <button class="modal-close">✕</button>
+            <div class="modal-header">
+                <img src="assets/images/leonor-ai-icon.png" alt="Leonor" class="leonor-avatar">
+                <div>
+                    <h2>Fale com Leonor</h2>
+                    <p class="text-muted">Sua amiga de confiança</p>
+                </div>
+            </div>
+            <div id="leonor-chat" class="chat-container"></div>
+            <div class="chat-input-group">
+                <input type="text" id="leonor-input" placeholder="Digite sua pergunta..." class="chat-input">
+                <button onclick="sendLeonorMessage()" class="btn-icon">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Modal -->
+    <div id="content-modal" class="modal">
+        <div class="modal-content modal-lg">
+            <button class="modal-close" onclick="document.getElementById('content-modal').classList.remove('active')">✕</button>
+            <div id="content-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Parental Controls Modal -->
+    <div id="parental-modal" class="modal">
+        <div class="modal-content modal-lg">
+            <button class="modal-close" onclick="document.getElementById('parental-modal').classList.remove('active')">✕</button>
+            <h2>🔐 Controlo Parental</h2>
+            <div id="parental-content"></div>
+        </div>
+    </div>
+
+    <!-- Privacy Settings Modal -->
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content modal-md">
+            <button class="modal-close" onclick="document.getElementById('privacy-modal').classList.remove('active')">✕</button>
+            <h2>🔒 Configurações de Privacidade</h2>
+            <div id="privacy-content"></div>
+        </div>
+    </div>
+
+    <!-- Parent Dashboard Modal -->
+    <div id="parent-dashboard-modal" class="modal">
+        <div class="modal-content modal-lg">
+            <button class="modal-close" onclick="document.getElementById('parent-dashboard-modal').classList.remove('active')">✕</button>
+            <h2>👨‍👩‍👧 Dashboard Parental</h2>
+            <div id="parent-dashboard-content"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid grid-4">
+                <div>
+                    <h4>Sobre</h4>
+                    <ul>
+                        <li><a href="#" onclick="showAbout()">Sobre Nós</a></li>
+                        <li><a href="#" onclick="showTerms()">Termos</a></li>
+                        <li><a href="#" onclick="showPrivacy()">Privacidade</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#" data-page="learn">Educação</a></li>
+                        <li><a href="#" data-page="tracker">Rastreador</a></li>
+                        <li><a href="#" data-page="community">Comunidade</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#" onclick="openSos()">Emergência</a></li>
+                        <li><a href="#" onclick="showFaq()">FAQ</a></li>
+                        <li><a href="#" onclick="showContact()">Contato</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Conecte-se</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Tabanca Menarca. Desenvolvido com ❤️ para a Guiné-Bissau.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="content-modules.js"></script>
+    <script src="parental-controls.js"></script>
+    <script src="parental-controls-ui.js"></script>
+    <script src="notifications.js"></script>
+    <script src="notifications-ui.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

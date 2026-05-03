@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tabanca Menarca - Educação sobre Saúde Menstrual para Jovens da Guiné-Bissau">
+    <meta name="theme-color" content="#FF6B9D">
+    <title>Tabanca Menarca - Saúde Menstrual</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">TM</div>
+                    <span>Tabanca Menarca</span>
+                </div>
+                <nav>
+                    <a href="#" data-page="home">Início</a>
+                    <a href="#" data-page="learn">Aprenda</a>
+                    <a href="#" data-page="community">Comunidade</a>
+                    <a href="#" data-page="resources">Recursos</a>
+                    <a href="#" data-page="profile">Meu Perfil</a>
+                </nav>
+                <button class="sos-button">🚨 SOS</button>
+                <button class="mobile-menu-toggle">☰</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="alert-container" style="position: fixed; top: 80px; right: 16px; z-index: 999; max-width: 400px;"></div>
+
+            <!-- HOME PAGE -->
+            <div id="page-home" class="page"></div>
+
+            <!-- LEARN PAGE -->
+            <div id="page-learn" class="page"></div>
+
+            <!-- COMMUNITY PAGE -->
+            <div id="page-community" class="page"></div>
+
+            <!-- RESOURCES PAGE -->
+            <div id="page-resources" class="page"></div>
+
+            <!-- PROFILE PAGE -->
+            <div id="page-profile" class="page"></div>
+        </main>
+
+        <!-- LEONOR AI MODAL -->
+        <div id="leonor-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🤖 Fale com Leonor</h2>
+                    <button class="modal-close">✕</button>
+                </div>
+                <div id="leonor-chat" style="
+                    height: 400px;
+                    overflow-y: auto;
+                    margin-bottom: 16px;
+                    padding: 16px;
+                    background-color: #F5F5F5;
+                    border-radius: 8px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                ">
+                    <div class="chat-message leonor-message" style="
+                        background-color: #FF6B9D;
+                        color: white;
+                        padding: 12px;
+                        border-radius: 8px;
+                        max-width: 80%;
+                        align-self: flex-start;
+                    ">
+                        Olá! Sou a Leonor. Como posso ajudá-la?
+                    </div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <input 
+                        type="text" 
+                        id="leonor-input" 
+                        placeholder="Digite sua pergunta..." 
+                        style="flex: 1;"
+                    >
+                    <button class="btn-primary" onclick="sendLeonorMessage()">Enviar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOS MODAL -->
+        <div id="sos-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🚨 Recursos de Emergência</h2>
+                    <button class="modal-close">✕</button>
+                </div>
+                <div class="alert alert-error mb-lg">
+                    <span>⚠️</span>
+                    <div>
+                        <strong>Se você está em perigo, procure ajuda imediatamente!</strong>
+                    </div>
+                </div>
+
+                <h3>Números de Emergência</h3>
+                <div style="margin-bottom: 24px;">
+                    <div class="card mb-md">
+                        <h4 style="margin: 0 0 8px 0;">Emergência Médica</h4>
+                        <a href="tel:112" style="font-size: 18px; font-weight: bold;">📞 112</a>
+                        <p class="text-muted" style="margin: 8px 0 0 0;">Disponível 24/7</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="margin: 0 0 8px 0;">Linha de Saúde da Mulher</h4>
+                        <a href="tel:+2453200100" style="font-size: 18px; font-weight: bold;">📞 +245 3200 100</a>
+                        <p class="text-muted" style="margin: 8px 0 0 0;">Seg-Sex 8h-17h</p>
+                    </div>
+                </div>
+
+                <h3>Hospitais Próximos</h3>
+                <div>
+                    <div class="card mb-md">
+                        <h4 style="margin: 0 0 8px 0;">Hospital Nacional Simão Mendes</h4>
+                        <p class="text-muted" style="margin: 0;">Bissau</p>
+                        <a href="tel:+2453201500">📞 +245 3201 500</a>
+                    </div>
+                    <div class="card">
+                        <h4 style="margin: 0 0 8px 0;">Centro de Saúde da Bandim</h4>
+                        <p class="text-muted" style="margin: 0;">Bissau</p>
+                        <a href="tel:+2453201800">📞 +245 3201 800</a>
+                    </div>
+                </div>
+
+                <div class="alert alert-info mt-lg">
+                    <span>ℹ️</span>
+                    <div>
+                        <strong>Você não está sozinha</strong>
+                        <p style="margin: 8px 0 0 0;">Se você está passando por dificuldades, existem pessoas que querem ajudar. Não hesite em procurar apoio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sobre</h3>
+                    <a href="#" onclick="showPage('home'); return false;">Início</a>
+                    <a href="#" onclick="showPage('learn'); return false;">Aprenda</a>
+                    <a href="#" onclick="showPage('community'); return false;">Comunidade</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Recursos</h3>
+                    <a href="#" onclick="showPage('resources'); return false;">Recursos</a>
+                    <a href="#" onclick="openSos(); return false;">Emergência</a>
+                    <a href="#" onclick="openLeonor(); return false;">Fale com Leonor</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Conta</h3>
+                    <a href="#" onclick="showPage('profile'); return false;">Meu Perfil</a>
+                    <a href="#">Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Email: contato@tabancamenarca.gw</p>
+                    <p>Telefone: +245 3200 100</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Tabanca Menarca. Desenvolvido com ❤️ para empoderar jovens da Guiné-Bissau.</p>
+            </div>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
