@@ -1,0 +1,31 @@
+# GitHub Pages Configuration for Tabanca Menarca
+# This file configures GitHub Pages to serve the website correctly
+
+# Disable Jekyll processing
+theme: null
+plugins: []
+
+# Ensure index.html is served as the root
+index: index.html
+
+# Build settings
+markdown: kramdown
+exclude:
+  - .gitignore
+  - README.md
+  - README_PT.md
+  - DEPLOYMENT.md
+  - DEPLOYMENT_GUIDE.md
+  - DEPLOYMENT_COLLECTIONSMADI.md
+  - GITHUB_DEPLOYMENT.md
+  - TESTING_CHECKLIST.md
+  - USER_GUIDE.md
+  - todo.md
+  - app-*.js
+  - content-modules-old.js
+  - index-old.html
+  - styles-old.css
+  - pages.html
+  - slides-*.md
+  - notifications-ui.js
+  - parental-controls-ui.js
